@@ -86,11 +86,11 @@ def render_html(profile: dict, template: str, *, photo: bytes | None = None, bra
     return ENV.get_template(f'{t}.html').render(**ctx)
 
 
-
 def render_pdf(profile: dict, template: str, *,
                photo: bytes | None = None,
                brain: bytes | None = None):
 
+    import shutil
     from playwright.sync_api import sync_playwright
 
     markup = render_html(
@@ -100,22 +100,19 @@ def render_pdf(profile: dict, template: str, *,
         brain=brain
     )
 
-    
-with sync_playwright() as playwright:
-    import shutil
+    with sync_playwright() as playwright:
 
-    chromium_path = (
-        shutil.which("chromium")
-        or shutil.which("chromium-browser")
-    )
-
-    if chromium_path:
-        browser = playwright.chromium.launch(
-            headless=True,
-            executable_path=chromium_path
+        chromium_path = (
+            shutil.which("chromium")
+            or shutil.which("chromium-browser")
         )
-    else:
-        browser = playwright.chromium.launch(headless=True)
+
+        launch_options = {"headless": True}
+
+        if chromium_path:
+            launch_options["executable_path"] = chromium_path
+
+        browser = playwright.chromium.launch(**launch_options)
 
         try:
             page = browser.new_page()
