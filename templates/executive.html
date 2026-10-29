@@ -160,7 +160,7 @@
       {% elif block.type == 'projects' %}<section class="exec-section"><h2>Projects</h2><div class="exec-projects">{% for project in p.projects %}<div class="exec-project"><strong>{{ project.name }}</strong><div class="exec-muted">{{ project.technologies }}</div><p>{{ project.description }}</p></div>{% endfor %}</div></section>
       {% elif block.type == 'training' %}<section class="exec-section"><h2>Additional Technical Training</h2><p class="exec-paragraph">{{ p.training | join('; ') }}.</p></section>
       {% elif block.type == 'languages' %}<section class="exec-section"><h2>Languages</h2><p class="exec-paragraph">{{ p.languages | join('  |  ') }}</p></section>
-      {% elif block.type == 'notes' %}<section class="exec-section"><h2>Additional Information — Review Imported Content</h2><p class="exec-paragraph unclassified">{{ p.extra_notes }}</p></section>
+      {% elif block.type == 'notes' %}<section class="exec-section"><h2>Additional Information</h2><p class="exec-paragraph unclassified">{{ p.extra_notes }}</p></section>
       {% endif %}
     {% endfor %}
   </main>

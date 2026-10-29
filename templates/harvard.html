@@ -17,5 +17,5 @@
   {% if p.projects %}<section class="section-h"><h2>Projects</h2><div class="projects-grid">{% for project in p.projects %}<article class="project-card"><h3>{{ project.name }}</h3><p class="tools">{{ project.technologies }}</p><p>{{ project.description }}</p></article>{% endfor %}</div></section>{% endif %}
   {% if p.training %}<section class="section-h"><h2>Additional Technical Training</h2><p>{% for item in p.training %}{{ item }}{% if not loop.last %}; {% endif %}{% endfor %}.</p></section>{% endif %}
   {% if p.languages %}<section class="section-h"><h2>Languages</h2><p>{{ p.languages | join('  |  ') }}</p></section>{% endif %}
-  {% if p.extra_notes %}<section class="section-h"><h2>Additional Information — Review Imported Content</h2><p class="unclassified">{{ p.extra_notes }}</p></section>{% endif %}
+  {% if p.extra_notes %}<section class="section-h"><h2>Additional Information</h2><p class="unclassified">{{ p.extra_notes }}</p></section>{% endif %}
 </main></body></html>
