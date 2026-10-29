@@ -1,0 +1,79 @@
+{
+  "name": "Alex Morgan",
+  "headline": "PRODUCT · ANALYTICS · OPERATIONS",
+  "tagline": "Building useful products through evidence and collaboration.",
+  "location": "Sample City",
+  "email": "alex@example.com",
+  "phone": "",
+  "linkedin": "",
+  "github": "",
+  "summary": "Sample résumé data for layout testing. Replace every field with your own verified information before using this document.",
+  "skills": [
+    "Python",
+    "SQL",
+    "Reports",
+    "HTML",
+    "CSS",
+    "Communication",
+    "Planning"
+  ],
+  "skill_groups": [
+    {
+      "title": "Analytics",
+      "items": [
+        "Reports",
+        "SQL",
+        "Python"
+      ]
+    },
+    {
+      "title": "Development",
+      "items": [
+        "HTML",
+        "CSS"
+      ]
+    },
+    {
+      "title": "Business",
+      "items": [
+        "Communication"
+      ]
+    },
+    {
+      "title": "Operations",
+      "items": [
+        "Planning"
+      ]
+    }
+  ],
+  "experience": [
+    {
+      "title": "Example Product Analyst",
+      "organization": "Sample Company",
+      "period": "2023–2025",
+      "bullets": [
+        "Built weekly operational reports for cross-functional meetings.",
+        "Documented product requirements and supported quality testing."
+      ]
+    }
+  ],
+  "education": [
+    {
+      "qualification": "Example Degree",
+      "institution": "Example University",
+      "year": "2022"
+    }
+  ],
+  "projects": [
+    {
+      "name": "Example Portfolio",
+      "technologies": "Python · HTML",
+      "description": "Sample text for testing the CV renderer."
+    }
+  ],
+  "training": [],
+  "languages": [
+    "English"
+  ],
+  "extra_notes": ""
+}

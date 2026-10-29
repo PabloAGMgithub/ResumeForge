@@ -1,0 +1,56 @@
+/* A4 reference: sidebar x23.4–167.35 pt, page content x177–552 pt.
+ * Background charcoal #40464D, navy #152B45, competence bg #F2F5F7.
+ */
+@page { size:A4; margin:0; }
+* {box-sizing:border-box;}
+body.executive-doc { margin:0; font:9pt/1.34 Carlito,Calibri,Arial,sans-serif; color:#152b45; }
+.executive-page {width:595.28pt; height:841.89pt; position:relative; background:white; break-after:page; overflow:hidden; }
+.executive-page:last-child {break-after:auto;}
+.executive-sidebar {position:absolute; left:23.4pt; top:27.4pt; width:143.95pt; height:771.75pt; background:#40464d; color:#e5ebf0; padding:14pt 8.3pt 0; text-align:center; overflow:hidden;}
+.portrait {width:111pt;height:114pt; object-fit:cover; display:block; margin:0 auto 11pt;}
+.portrait-empty {display:flex; align-items:center; justify-content:center; color:white; font-size:40pt; background:#586271;}
+.sidebar-name {margin:0 auto; text-align:center; text-transform:uppercase; font-weight:700; font-size:12.5pt; line-height:1.65; color:#f7f9fb; max-width:130pt; }
+.sidebar-name-secondary { margin-top:18pt; }
+.sidebar-headline {font-size:7.7pt; color:#d8dfe6; margin:3pt -3pt 14pt; letter-spacing:.2pt; }
+.sidebar-tagline {font-size:10.4pt; color:white; line-height:1.5; margin:17pt auto 20pt; max-width:124pt;}
+.sidebar-contacts {text-align:left; font-size:8pt; color:#edf2f5; padding:0 0 0 0; overflow-wrap:anywhere;}
+.sidebar-contacts p {margin:0 0 14pt;}
+.sidebar-contacts p.contact-email { font-size:7.3pt; margin:11pt 0 8pt; }
+.side-icon {font-size:12pt; color:#97a9b6; margin-right:6pt;}
+.sidebar-contacts .side-link {font-size:8pt; text-decoration:underline; margin:8pt 0;}
+.sidebar-languages {margin-top:27pt; text-align:left; font-size:8.8pt;}
+.sidebar-cap {font-size:8.0pt; color:#d8dfe6; text-align:center; text-transform:uppercase; margin-bottom:15pt; letter-spacing:.15pt;}
+.sidebar-languages p {margin:0 0 14pt;}
+.sidebar-overview {margin-top:24pt; text-align:left;}
+.sidebar-overview-group {margin:17pt 0;}
+.sidebar-overview-group .sidebar-cap {font-size:8.2pt; margin:0 0 5pt;}
+.sidebar-overview-group p {font-size:8.7pt; margin:0; line-height:1.38; color:#e5ebf0;}
+.brain-decoration {position:absolute;bottom:42pt;left:0;width:144pt;height:164pt; object-fit:contain; mix-blend-mode:screen; opacity:.85;}
+.executive-main {position:absolute; left:176.9pt; top:53pt; width:375pt; height:735pt; }
+.exec-section {margin:0 0 17pt;}
+.executive-main h2 {font-size:10.5pt; font-weight:700; color:#152b45; margin:0 0 8pt; padding:0 0 3pt; line-height:1.2; text-transform:uppercase; border-bottom:0.8pt solid #cfd7df;}
+.exec-summary {line-height:1.4; font-size:9.5pt; margin:0;}
+.competency-grid {display:grid; grid-template-columns:1fr 1fr; margin-top:10pt; background:#f2f5f7;}
+.competency {min-height:94pt; padding:20pt 6pt 5pt; }
+.competency h3 {font-size:9.8pt; line-height:1.15; text-transform:uppercase; margin:0 0 8pt; color:#17324d;}
+.competency-glyph {font-size:17pt;color:#8395a3; display:inline-block; min-width:32pt; vertical-align:middle;}
+.competency ul {list-style:none; padding:0; margin:0; font-size:8.45pt; }
+.competency li {margin:0 0 7pt; padding-left:9pt; position:relative; line-height:1.18;}
+.competency li:before {content:'•'; position:absolute; left:0;}
+.exec-heading-only {margin-bottom:9pt;}
+.exec-role {margin:0 0 10pt; break-inside:avoid;}
+.exec-role h3 {font-size:10pt; color:#152b45; margin:0 0 4pt; line-height:1.2;}
+.exec-role .exec-muted {font-size:8.5pt; color:#46647f; margin-bottom:5pt;}
+.exec-role ul {margin:0; padding:0; list-style:none; font-size:9.0pt; line-height:1.33;}
+.exec-role li {padding-left:10pt;position:relative;margin:0 0 3pt;}
+.exec-role li:before {content:'•'; position:absolute;left:0;}
+.exec-edu h2 {margin-bottom:12pt;}
+.exec-edu-item {margin-bottom:15pt;break-inside:avoid;}
+.exec-edu-item strong {display:block; font-size:10pt;line-height:1.2;}
+.exec-edu-item div {font-size:8.7pt; color:#46647f; margin-top:4pt;}
+.exec-projects {display:grid; grid-template-columns:1fr 1fr; background:#f2f5f7; padding:9pt 9pt; gap:16pt 19pt;}
+.exec-project strong {color:#345674; font-size:9.6pt;}
+.exec-project .exec-muted {margin:6pt 0; color:#46647f; font-size:8.5pt;}
+.exec-project p,.exec-paragraph {font-size:8.9pt;line-height:1.35;margin:0;}
+.unclassified {white-space:pre-wrap; overflow-wrap:anywhere; font-size:7.7pt;}
+@media screen {body.executive-doc {background:#eef1f5;padding:12px;} .executive-page {margin:0 auto 16px;box-shadow:0 5px 24px #0002;}}

@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>{{ p.name }} — Harvard CV</title><style>{{ css | safe }}</style></head>
+<body class="harvard-doc"><main class="harvard-sheet">
+  <header class="harvard-header">
+    <h1>{{ p.name }}</h1>
+    <div class="contact-row">{% if p.location %}{{ p.location }}{% endif %}{% if p.email %} <span class="contact-dot">•</span> {{ p.email }}{% endif %}{% if p.phone %} <span class="contact-dot">•</span> {{ p.phone }}{% endif %}</div>
+    <div class="social-row">{% if p.linkedin %}LinkedIn: <span>{{ p.linkedin | replace('https://www.linkedin.com/in/', '') | replace('https://linkedin.com/in/', '') }}</span>{% endif %}{% if p.github %} <span class="contact-dot">•</span> GitHub: <span>{{ p.github | replace('https://', '') | replace('http://', '') }}</span>{% endif %}</div>
+  </header>
+  {% if p.summary %}<section class="section-h"><h2>Professional Profile</h2><p class="profile-p">{{ p.summary }}</p></section>{% endif %}
+  {% if skills %}<section class="section-h"><h2>Technical Skills &amp; Core Competencies</h2><div class="skill-pills">{% for s in skills %}<span class="skill-pill">{{ s }}</span>{% endfor %}</div></section>{% endif %}
+  {% if p.experience %}<section class="section-h"><h2>Professional Experience</h2>
+    {% for job in p.experience %}<article class="harvard-job"><div class="job-head"><div class="job-title">{{ job.title }}</div><div class="job-date">{{ job.period }}</div></div><div class="job-company">{{ job.organization }}</div>
+      {% if job.bullets %}<ul class="job-bullets">{% for bullet in job.bullets %}<li>{{ bullet }}</li>{% endfor %}</ul>{% endif %}
+    </article>{% endfor %}
+  </section>{% endif %}
+  {% if p.education %}<section class="section-h"><h2>Education &amp; Professional Qualifications</h2><div class="edu-list">{% for ed in p.education %}<div class="edu-item"><strong>{{ ed.qualification }}</strong><div>{{ ed.institution }}{% if ed.year %} <span class="thinpipe">|</span> {{ ed.year }}{% endif %}</div></div>{% endfor %}</div></section>{% endif %}
+  {% if p.projects %}<section class="section-h"><h2>Projects</h2><div class="projects-grid">{% for project in p.projects %}<article class="project-card"><h3>{{ project.name }}</h3><p class="tools">{{ project.technologies }}</p><p>{{ project.description }}</p></article>{% endfor %}</div></section>{% endif %}
+  {% if p.training %}<section class="section-h"><h2>Additional Technical Training</h2><p>{% for item in p.training %}{{ item }}{% if not loop.last %}; {% endif %}{% endfor %}.</p></section>{% endif %}
+  {% if p.languages %}<section class="section-h"><h2>Languages</h2><p>{{ p.languages | join('  |  ') }}</p></section>{% endif %}
+  {% if p.extra_notes %}<section class="section-h"><h2>Additional Information — Review Imported Content</h2><p class="unclassified">{{ p.extra_notes }}</p></section>{% endif %}
+</main></body></html>

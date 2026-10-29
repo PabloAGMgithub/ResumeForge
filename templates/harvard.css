@@ -1,0 +1,78 @@
+/* PDF reference geometry: US Letter (612 × 792 pt), ~44.7pt side margins.
+ * Navy #162339, burgundy #A61C35, divider #D7DEE6, muted #53647A.
+ */
+@page { size: letter; margin: 31pt 44.7pt 40pt; }
+* { box-sizing: border-box; }
+body { margin:0; color:#162339; background:white; font-family:Carlito,Calibri,Arial,sans-serif; font-size:9pt; line-height:1.39; }
+.harvard-sheet { width:100%; }
+.harvard-header { text-align:center; margin-bottom:13pt; }
+.harvard-header h1 { font-size:17.5pt; font-weight:700; letter-spacing:.12pt; margin:0 0 1.2pt; color:#162339; line-height:1.2; text-transform:uppercase; }
+.contact-row { margin-top:5pt; font-size:9pt; }
+.contact-dot { padding:0 3pt; }
+.social-row { font-size:8.7pt; margin-top:3pt; }
+.social-row > span:not(.contact-dot) { font-family:'Noto Serif',Georgia,serif; font-size:8.3pt; color:#345674; }
+.section-h { margin:0 0 7pt; }
+.section-h > h2 { font-size:10pt; font-weight:700; color:#a61c35; border-top:1pt solid #d7dee6; border-bottom:0; text-transform:uppercase; margin:0 0 3.5pt; padding-top:7pt; line-height:1.2; }
+.section-h > p { margin:0; }
+.profile-p { text-align:left; line-height:1.39; }
+.skill-pills { display:flex; flex-wrap:wrap; column-gap:9pt; row-gap:5.4pt; padding:1pt 0 2pt 12pt; }
+.skill-pill { background:#f8fafc; border:0.75pt solid #d7e2eb; border-radius:15pt; padding:2.8pt 5.7pt 2.6pt; line-height:1.13; white-space:nowrap; font-size:7.5pt; color:#53647a; }
+.harvard-job {
+    margin-left: 0;
+    padding-left: 13pt;
+    border-left: none;
+    margin-bottom: 6.3pt;
+    break-inside: avoid;
+}
+
+.job-head,
+.job-company {
+    border-left: 1.7pt solid #a61c35;
+    margin-left: -8pt;
+    padding-left: 6.3pt;
+}
+
+.job-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8pt;
+}
+
+.job-title {
+    font-weight: 700;
+    font-size: 9.5pt;
+}
+
+.job-date {
+    color: #53647a;
+    font-size: 8.5pt;
+    white-space: nowrap;
+}
+
+.job-company {
+    font-size: 8.5pt;
+    font-weight: 700;
+    color: #a61c35;
+    margin-top: 0;
+    margin-bottom: 3pt;
+    padding-top: 1.6pt;
+}
+.job-bullets { margin:0; padding:0 0 0 9.5pt; }
+.job-bullets li { padding-left:0; margin:0 0 2.3pt; line-height:1.33; }
+.job-bullets li::marker { color:#a61c35; }
+.edu-list { margin-left:6pt; }
+.edu-item { break-inside:avoid; margin-bottom:1.5pt; }
+.edu-item strong { font-family:'Noto Serif',Georgia,serif; font-size:9.3pt; color:#162339; line-height:1.13; }
+.edu-item div { font-size:8.5pt; color:#53647a; margin-top:0; line-height:1.12; }
+.thinpipe { color:#d3dce5; margin:0 4pt; }
+.projects-grid { display:grid; grid-template-columns:1fr 1fr; background:#f1f5f9; border-top:1.7pt solid #a61c35; column-gap:0; }
+.project-card { padding:4pt 9pt 5pt 6pt; border-bottom:1.3pt solid #a61c35; break-inside:avoid; min-height:67pt; }
+.project-card h3 { margin:0 0 5pt; font-weight:400; font-size:8.7pt; color:#345674; }
+.project-card .tools { font-size:8.4pt; color:#53647a; margin:0 0 7pt; }
+.project-card p { margin:0; font-size:8.8pt; line-height:1.32; }
+.unclassified { white-space:pre-wrap; color:#374151; font-size:8.3pt; }
+@media screen {
+ body { background:#eef1f5; padding:10px; }
+ .harvard-sheet { width:612pt; background:white; min-height:792pt; margin:0 auto; padding:31pt 44.7pt 40pt; box-shadow:0 6px 30px #0002; }
+}

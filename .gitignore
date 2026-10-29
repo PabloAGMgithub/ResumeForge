@@ -1,0 +1,18 @@
+# Your actual resume information and photo must stay local.
+local_data/*
+!local_data/.gitkeep
+*.pdf
+*.docx
+*.env
+.env
+.streamlit/secrets.toml
+__pycache__/
+.pytest_cache/
+.venv/
+venv/
+*.pyc
+.DS_Store
+# Generated preview images and temporary files
+*_preview_p*.png
+*.zip
+*.log

@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>{{ p.name }} — Executive CV</title><style>{{ css | safe }}</style></head>
+<body class="executive-doc">
+{% for page in pages %}
+<section class="executive-page">
+  <aside 
+<aside class="executive-sidebar">
+
+  <!-- PROFILE PHOTO: REPEAT ON EVERY PAGE -->
+  {% if photo %}
+    <img class="portrait" src="{{ photo }}" alt="Profile portrait">
+  {% else %}
+    <div class="portrait portrait-empty">
+      {{ p.name[:1] or 'CV' }}
+    </div>
+  {% endif %}
+
+  <!-- PROFESSIONAL IDENTITY -->
+  <div class="sidebar-name">{{ p.name }}</div>
+
+  {% if p.headline %}
+    <div class="sidebar-headline">{{ p.headline }}</div>
+  {% endif %}
+
+  {% if p.tagline %}
+    <p class="sidebar-tagline">{{ p.tagline }}</p>
+  {% endif %}
+
+  <!-- FIRST PAGE: CONTACT AND LANGUAGES -->
+  {% if page.index == 0 %}
+
+    {% if p.location or p.phone or p.email or p.linkedin or p.github %}
+      <div class="sidebar-contacts">
+
+        {% if p.location %}
+          <p><span class="side-icon">⌖</span> {{ p.location }}</p>
+        {% endif %}
+
+        {% if p.phone %}
+          <p><span class="side-icon">☎</span> {{ p.phone }}</p>
+        {% endif %}
+
+        {% if p.email %}
+          <p class="contact-email">{{ p.email }}</p>
+        {% endif %}
+
+        {% if p.linkedin %}
+          <p class="side-link">{{ p.linkedin | replace('https://www.linkedin.com/in/', 'LinkedIn · ') | replace('https://linkedin.com/in/', 'LinkedIn · ') }}</p>
+        {% endif %}
+
+        {% if p.github %}
+          <p class="side-link">{{ p.github | replace('https://github.com/', 'GitHub · ') }}</p>
+        {% endif %}
+
+      </div>
+    {% endif %}
+
+    {% if p.languages %}
+      <div class="sidebar-languages">
+        <div class="sidebar-cap">◎ LANGUAGES</div>
+        {% for lang in p.languages %}
+          <p>{{ lang }}</p>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+  <!-- OTHER PAGES: DYNAMIC CAREER OVERVIEW -->
+  {% else %}
+
+    {% set ns = namespace(shown=0) %}
+
+    {% if p.skill_groups or skills or p.experience or p.education or p.projects or p.languages %}
+      <div class="sidebar-overview">
+
+        <div class="sidebar-cap">▣ CAREER OVERVIEW</div>
+
+        <!-- EXPLICIT COMPETENCY GROUPS -->
+        {% for group in p.skill_groups %}
+          {% if ns.shown < 4 and group["items"] %}
+            <div class="sidebar-overview-group">
+              <div class="sidebar-cap">{{ group.title }}</div>
+              <p>{{ group["items"][:3] | join(', ') }}</p>
+            </div>
+            {% set ns.shown = ns.shown + 1 %}
+          {% endif %}
+        {% endfor %}
+
+        <!-- INDIVIDUAL SKILLS FALLBACK -->
+        {% if ns.shown == 0 and skills %}
+          <div class="sidebar-overview-group">
+            <div class="sidebar-cap">CORE SKILLS</div>
+            <p>{{ skills[:5] | join(', ') }}</p>
+          </div>
+          {% set ns.shown = ns.shown + 1 %}
+        {% endif %}
+
+        <!-- EXPERIENCE -->
+        {% if ns.shown < 4 and p.experience %}
+          <div class="sidebar-overview-group">
+            <div class="sidebar-cap">EXPERIENCE</div>
+            {% for job in p.experience[:2] %}
+              {% if job.title %}
+                <p>{{ job.title }}</p>
+              {% endif %}
+            {% endfor %}
+          </div>
+          {% set ns.shown = ns.shown + 1 %}
+        {% endif %}
+
+        <!-- EDUCATION -->
+        {% if ns.shown < 4 and p.education %}
+          <div class="sidebar-overview-group">
+            <div class="sidebar-cap">EDUCATION</div>
+            {% for ed in p.education[:2] %}
+              <p>{{ ed.qualification }}</p>
+            {% endfor %}
+          </div>
+          {% set ns.shown = ns.shown + 1 %}
+        {% endif %}
+
+        <!-- PROJECTS -->
+        {% if ns.shown < 4 and p.projects %}
+          <div class="sidebar-overview-group">
+            <div class="sidebar-cap">PROJECTS</div>
+            {% for project in p.projects[:2] %}
+              <p>{{ project.name }}</p>
+            {% endfor %}
+          </div>
+          {% set ns.shown = ns.shown + 1 %}
+        {% endif %}
+
+        <!-- LANGUAGES -->
+        {% if ns.shown < 4 and p.languages %}
+          <div class="sidebar-overview-group">
+            <div class="sidebar-cap">LANGUAGES</div>
+            <p>{{ p.languages[:3] | join(', ') }}</p>
+          </div>
+        {% endif %}
+
+      </div>
+    {% endif %}
+
+  {% endif %}
+
+  <!-- AI BRAIN ARTWORK -->
+  {% if brain %}
+    <img class="brain-decoration"
+         src="{{ brain }}"
+         alt="AI illustration">
+  {% endif %}
+
+</aside>
+  <main class="executive-main">
+    {% for block in page.blocks %}
+      {% if block.type == 'profile' %}<section class="exec-section"><h2>Professional Profile</h2><p class="exec-summary">{{ p.summary }}</p></section>
+      {% elif block.type == 'skills' %}<section class="exec-section"><h2>Key Competencies</h2><div class="competency-grid">{% for group in p.skill_groups[:4] %}<div class="competency"><h3><span class="competency-glyph">{% if loop.index == 1 %}◎{% elif loop.index == 2 %}⌘{% elif loop.index == 3 %}▥{% else %}▣{% endif %}</span>{{ group.title }}</h3><ul>{% for item in group["items"] %}<li>{{ item }}</li>{% endfor %}</ul></div>{% endfor %}</div></section>
+      {% elif block.type == 'heading' %}<section class="exec-section exec-heading-only"><h2>{{ block.text }}</h2></section>
+      {% elif block.type == 'role' %}<article class="exec-role"><h3>{{ block.job.title }}</h3><div class="exec-muted">{{ block.job.organization }} &nbsp;|&nbsp; {{ block.job.period }}</div><ul>{% for bullet in block.job.bullets %}<li>{{ bullet }}</li>{% endfor %}</ul></article>
+      {% elif block.type == 'education' %}<section class="exec-edu"><h2>Education &amp; Professional Qualifications</h2>{% for ed in p.education %}<div class="exec-edu-item"><strong>{{ ed.qualification }}</strong><div>{{ ed.institution }}{% if ed.year %} · {{ ed.year }}{% endif %}</div></div>{% endfor %}</section>
+      {% elif block.type == 'projects' %}<section class="exec-section"><h2>Projects</h2><div class="exec-projects">{% for project in p.projects %}<div class="exec-project"><strong>{{ project.name }}</strong><div class="exec-muted">{{ project.technologies }}</div><p>{{ project.description }}</p></div>{% endfor %}</div></section>
+      {% elif block.type == 'training' %}<section class="exec-section"><h2>Additional Technical Training</h2><p class="exec-paragraph">{{ p.training | join('; ') }}.</p></section>
+      {% elif block.type == 'languages' %}<section class="exec-section"><h2>Languages</h2><p class="exec-paragraph">{{ p.languages | join('  |  ') }}</p></section>
+      {% elif block.type == 'notes' %}<section class="exec-section"><h2>Additional Information — Review Imported Content</h2><p class="exec-paragraph unclassified">{{ p.extra_notes }}</p></section>
+      {% endif %}
+    {% endfor %}
+  </main>
+</section>
+{% endfor %}
+</body></html>
