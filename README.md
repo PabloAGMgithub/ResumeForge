@@ -1,4 +1,4 @@
-# ResumeForge Studio 2.0 — Local Starter
+# ResumeForge Studio
 
 A **free, local-first** CV manager with two custom HTML/CSS templates reconstructed from reference PDFs:
 
