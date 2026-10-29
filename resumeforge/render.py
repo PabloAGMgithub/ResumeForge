@@ -100,7 +100,21 @@ def render_pdf(profile: dict, template: str, *,
         brain=brain
     )
 
-    with sync_playwright() as playwright:
+    
+with sync_playwright() as playwright:
+    import shutil
+
+    chromium_path = (
+        shutil.which("chromium")
+        or shutil.which("chromium-browser")
+    )
+
+    if chromium_path:
+        browser = playwright.chromium.launch(
+            headless=True,
+            executable_path=chromium_path
+        )
+    else:
         browser = playwright.chromium.launch(headless=True)
 
         try:
