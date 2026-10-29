@@ -1,6 +1,6 @@
-# ResumeForge Studio
+# ResumeForge — Free CV Builder
 
-A **free, local-first** CV manager with two custom HTML/CSS templates reconstructed from reference PDFs:
+Build, customize, and export professional CVs for free. Import PDF or Word documents, edit your career information, and choose between Executive and Harvard-style templates.
 
 - **Executive** — A4, charcoal left sidebar, professional portrait, subdued AI-brain illustration, navy content, four competence panels, and detailed history.
 - **Harvard-style** — US Letter, centered contact header, burgundy headings and job rails, **rounded skill pills made of actual text**, and two-column light-gray project cards. No portrait.

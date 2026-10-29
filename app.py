@@ -22,7 +22,12 @@ from resumeforge.render import render_pdf
 BASE = Path(__file__).resolve().parent
 USER_DATA = BASE / "local_data"
 
-st.set_page_config(page_title="ResumeForge Studio",page_icon="📄",layout="wide",initial_sidebar_state="expanded")
+st.set_page_config(
+    page_title="ResumeForge | Free CV Builder",
+    page_icon=Image.open(BASE / "assets" / "resumeforge_icon.png"),
+    layout="wide",
+    initial_sidebar_state="expanded"
+)
 st.markdown("""<style>
 .block-container {padding-top:2rem;padding-bottom:3rem;max-width:1460px;}
 [data-testid='stSidebar'] {background:#f3f5f8;}
