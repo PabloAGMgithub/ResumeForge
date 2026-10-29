@@ -1,0 +1,1070 @@
+
+/* ============================================================
+   RESUMEFORGE STUDIO
+   FUTURISTIC, RESTRAINED DESIGN SYSTEM
+
+   This stylesheet controls the application interface only.
+   It does not change the Executive or Harvard PDF templates.
+   ============================================================ */
+
+:root {
+    --rf-navy: #111d32;
+    --rf-navy-2: #1b3048;
+    --rf-steel: #29475f;
+    --rf-ink: #17243b;
+    --rf-cyan: #92dfe5;
+    --rf-burgundy: #a61c35;
+    --rf-burgundy-light: #bd2948;
+    --rf-muted: #5c7088;
+    --rf-border: #dce6f0;
+
+    --rf-shadow: 0 12px 28px rgba(17, 29, 50, .10);
+
+    --rf-dark-gradient:
+        radial-gradient(
+            circle at 93% 7%,
+            rgba(134, 217, 222, .17),
+            transparent 39%
+        ),
+        linear-gradient(
+            125deg,
+            #111d32 0%,
+            #243d57 100%
+        );
+}
+
+
+/* ============================================================
+   01 — MAIN BACKGROUND
+   ============================================================ */
+
+[data-testid="stAppViewContainer"] {
+    background:
+        radial-gradient(
+            circle at 12% 8%,
+            rgba(134, 217, 222, .15),
+            transparent 27%
+        ),
+        radial-gradient(
+            circle at 91% 20%,
+            rgba(47, 87, 130, .13),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 76% 81%,
+            rgba(166, 28, 53, .045),
+            transparent 26%
+        ),
+        linear-gradient(
+            180deg,
+            #edf4fa 0%,
+            #f8fbff 54%,
+            #ffffff 100%
+        );
+}
+
+.block-container {
+    max-width: 1210px;
+    padding-top: 1.75rem;
+    padding-bottom: 3.5rem;
+}
+
+h1, h2, h3, h4 {
+    color: var(--rf-ink);
+    letter-spacing: -.015em;
+}
+
+
+/* ============================================================
+   02 — SIDEBAR
+   ============================================================ */
+
+[data-testid="stSidebar"] {
+    background: linear-gradient(
+        160deg,
+        #111d32,
+        #1e344c
+    );
+    border-right: 1px solid #34506a;
+}
+
+[data-testid="stSidebar"] h1,
+[data-testid="stSidebar"] h2,
+[data-testid="stSidebar"] h3,
+[data-testid="stSidebar"] h4,
+[data-testid="stSidebar"] p,
+[data-testid="stSidebar"] strong,
+[data-testid="stSidebar"] label {
+    color: #eff5fc;
+}
+
+[data-testid="stSidebar"]
+[data-testid="stCaptionContainer"] * {
+    color: #bdcede !important;
+}
+
+[data-testid="stSidebar"]
+[data-testid="stWidgetLabel"] * {
+    color: #ebf4fa !important;
+}
+
+[data-testid="stSidebarNav"] a {
+    border-radius: 11px;
+}
+
+[data-testid="stSidebarNav"]
+a[aria-current="page"] {
+    background: #2c4a65 !important;
+}
+
+[data-testid="stSidebar"]
+[data-testid="stExpander"] {
+    background: rgba(255,255,255,.055);
+    border: 1px solid #476681;
+    border-radius: 13px;
+}
+
+[data-testid="stSidebar"]
+[data-testid="stExpander"] button,
+[data-testid="stSidebar"]
+[data-testid="stExpander"] button * {
+    color: #f3f7ff;
+}
+
+[data-testid="stSidebar"] .stButton button,
+[data-testid="stSidebar"] .stDownloadButton button {
+    border: 1px solid #5e7791;
+    background: #27435e;
+    color: white;
+}
+
+[data-testid="stSidebar"] .stButton button:hover,
+[data-testid="stSidebar"] .stDownloadButton button:hover {
+    border-color: var(--rf-cyan);
+    background: #315371;
+    color: white;
+}
+
+
+/* ============================================================
+   03 — MAIN RESUMEFORGE HERO
+   ============================================================ */
+
+.rf-hero {
+    background: var(--rf-dark-gradient);
+    border: 1px solid #344f6b;
+    border-radius: 26px;
+    padding: 45px 46px;
+    margin: 0 0 28px;
+    color: white;
+
+    box-shadow:
+        0 18px 44px rgba(17,29,50,.15);
+
+    overflow: hidden;
+    position: relative;
+}
+
+.rf-hero::after {
+    content: "";
+    position: absolute;
+    right: -65px;
+    top: -146px;
+    width: 270px;
+    height: 270px;
+
+    border: 1px solid rgba(134,217,222,.22);
+    border-radius: 50%;
+
+    box-shadow:
+        0 0 0 38px rgba(134,217,222,.04),
+        0 0 0 88px rgba(134,217,222,.025);
+
+    pointer-events: none;
+}
+
+.rf-kicker {
+    color: var(--rf-cyan) !important;
+    font-size: .76rem;
+    letter-spacing: .18em;
+    font-weight: 750;
+    margin-bottom: 13px;
+}
+
+.rf-hero h1 {
+    color: #fff !important;
+    font-size: clamp(2rem,3.4vw,3rem);
+    line-height: 1.17;
+    margin: 0 0 14px;
+}
+
+.rf-hero p {
+    color: #d0e0f0 !important;
+    line-height: 1.64;
+    font-size: 1.04rem;
+    max-width: 710px;
+    margin: 0 0 17px;
+}
+
+.rf-chips {
+    display: flex;
+    gap: 9px;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
+}
+
+.rf-chip {
+    border: 1px solid #506780;
+    background: rgba(255,255,255,.07);
+    padding: 7px 12px;
+    border-radius: 999px;
+    font-size: .79rem;
+    color: #f3f8ff;
+}
+
+
+/* ============================================================
+   04 — HEADINGS AND CONTENT PANELS
+   ============================================================ */
+
+.rf-eyebrow {
+    text-transform: uppercase;
+    font-size: .75rem;
+    letter-spacing: .16em;
+    color: var(--rf-burgundy);
+    font-weight: 800;
+    margin-bottom: 9px;
+}
+
+.rf-heading {
+    font-size: clamp(1.65rem,3vw,2rem);
+    font-weight: 750;
+    line-height: 1.25;
+    letter-spacing: -.03em;
+    color: var(--rf-ink);
+    margin-bottom: 10px;
+}
+
+.rf-sub {
+    color: var(--rf-muted);
+    font-size: 1rem;
+    margin-bottom: 20px;
+    line-height: 1.65;
+}
+
+.rf-panel {
+    background: rgba(255,255,255,.9);
+    border: 1px solid var(--rf-border);
+    border-radius: 18px;
+    padding: 19px 22px;
+    margin: 12px 0;
+
+    box-shadow:
+        0 9px 24px rgba(17,29,50,.055);
+}
+
+.rf-panel h3 {
+    margin: 0 0 8px;
+    font-size: 1.05rem;
+}
+
+.rf-panel p {
+    color: #60748b;
+    margin: 0;
+    font-size: .88rem;
+    line-height: 1.55;
+}
+
+.rf-note {
+    background: #eef5fb;
+    border-left: 3px solid var(--rf-burgundy);
+    padding: 13px 16px;
+    border-radius: 10px;
+    color: #354e68;
+    margin: 14px 0;
+}
+
+.rf-divider {
+    height: 1px;
+    background: #dce6f0;
+    margin: 14px 0 22px;
+}
+
+.rf-tag {
+    display: inline-block;
+    border: 1px solid #d0dfea;
+    border-radius: 999px;
+    padding: 5px 10px;
+    font-size: .78rem;
+    color: #4f6075;
+    background: #f7fafd;
+    margin: 3px;
+}
+
+
+/* ============================================================
+   05 — HOW IT WORKS: FOUR CARDS
+   ============================================================ */
+
+.rf-step-grid {
+    display: grid;
+    grid-template-columns: repeat(4,minmax(0,1fr));
+    gap: 14px;
+    margin: 20px 0 28px;
+}
+
+.rf-step {
+    position: relative;
+    overflow: hidden;
+    background: var(--rf-dark-gradient) !important;
+    border: 1px solid #385571 !important;
+    border-radius: 22px;
+    padding: 23px 22px;
+    min-height: 164px;
+
+    box-shadow: var(--rf-shadow);
+
+    transition:
+        box-shadow .2s ease,
+        transform .2s ease,
+        border-color .2s ease;
+}
+
+.rf-step::after {
+    content: "";
+    position: absolute;
+    width: 110px;
+    height: 110px;
+    right: -48px;
+    top: -53px;
+    border: 1px solid rgba(146,223,229,.19);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.rf-step b {
+    color: var(--rf-cyan) !important;
+    font-size: .75rem;
+    letter-spacing: .1em;
+}
+
+.rf-step h3 {
+    color: #fff !important;
+    font-size: 1.05rem;
+    line-height: 1.3;
+    margin: 16px 0 9px;
+}
+
+.rf-step p {
+    color: #ccdaea !important;
+    font-size: .9rem;
+    line-height: 1.52;
+    margin: 0;
+}
+
+.rf-step:hover {
+    transform: translateY(-2px);
+    border-color: #7abcc7 !important;
+
+    box-shadow:
+        0 16px 36px rgba(17,29,50,.2);
+}
+
+
+/* ============================================================
+   06 — LET'S BEGIN: THREE STARTING CARDS
+   ============================================================ */
+
+:is(
+    .st-key-rf-start-upload,
+    .st-key-rf-start-new,
+    .st-key-rf-start-example
+) {
+    position: relative;
+    background: var(--rf-dark-gradient) !important;
+    color: #fff !important;
+    border: 1px solid #385571 !important;
+    border-radius: 22px !important;
+    padding: 8px !important;
+    min-height: 275px;
+    box-shadow: var(--rf-shadow);
+    overflow: hidden;
+
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease;
+}
+
+:is(
+    .st-key-rf-start-upload,
+    .st-key-rf-start-new,
+    .st-key-rf-start-example
+):hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 16px 36px rgba(17,29,50,.2);
+}
+
+:is(
+    .st-key-rf-start-upload,
+    .st-key-rf-start-new,
+    .st-key-rf-start-example
+) [data-testid="stVerticalBlockBorderWrapper"] {
+    background: transparent !important;
+    border-color: transparent !important;
+}
+
+:is(
+    .st-key-rf-start-upload,
+    .st-key-rf-start-new,
+    .st-key-rf-start-example
+) :is(h3,h4,p) {
+    color: #fff !important;
+}
+
+:is(
+    .st-key-rf-start-upload,
+    .st-key-rf-start-new,
+    .st-key-rf-start-example
+) [data-testid="stMarkdownContainer"] p {
+    color: #ccdbea !important;
+    line-height: 1.6;
+}
+
+:is(
+    .st-key-rf-start-upload,
+    .st-key-rf-start-new,
+    .st-key-rf-start-example
+) button:not([kind="primary"]) {
+    background: rgba(255,255,255,.09) !important;
+    border: 1px solid #617d97 !important;
+    color: #fff !important;
+}
+
+:is(
+    .st-key-rf-start-upload,
+    .st-key-rf-start-new,
+    .st-key-rf-start-example
+) button:not([kind="primary"]):hover {
+    border-color: var(--rf-cyan) !important;
+    background: rgba(146,223,229,.14) !important;
+}
+
+
+/* ============================================================
+   07 — FORMS, INPUTS AND EDITING AREAS
+   ============================================================ */
+
+[data-testid="stForm"] {
+    background: linear-gradient(
+        135deg,
+        rgba(255,255,255,.94),
+        rgba(237,245,252,.94)
+    );
+
+    border: 1px solid #d6e3f0 !important;
+    border-radius: 19px !important;
+    padding: 18px 20px;
+
+    box-shadow:
+        0 10px 28px rgba(17,29,50,.055);
+}
+
+[data-testid="stForm"] h4 {
+    color: #17243b;
+}
+
+[data-testid="stForm"] input,
+[data-testid="stForm"] textarea {
+    border-radius: 10px;
+}
+
+[data-testid="stExpander"] {
+    border-radius: 13px;
+    border-color: #d6e3ee;
+}
+
+[data-testid="stMetric"] {
+    background: #fff;
+    border: 1px solid #e1eaf3;
+    padding: 12px 17px;
+    border-radius: 15px;
+}
+
+[data-testid="stRadio"] [role="radiogroup"] {
+    gap: 8px;
+}
+
+[data-testid="stRadio"] label {
+    border-radius: 10px;
+}
+
+[data-testid="stVerticalBlockBorderWrapper"] {
+    border-radius: 16px;
+}
+
+
+/* ============================================================
+   08 — BUTTONS: GLOBAL STUDIO STYLE
+   ============================================================ */
+
+.stButton > button,
+.stDownloadButton > button,
+[data-testid="stFormSubmitButton"] button {
+    min-height: 43px;
+    border-radius: 12px !important;
+    border: 1px solid #cbdbe9;
+
+    background: linear-gradient(
+        180deg,
+        #ffffff 0%,
+        #f0f6fb 100%
+    );
+
+    color: #1c304a;
+    font-weight: 650;
+
+    box-shadow:
+        0 6px 16px rgba(17,29,50,.06);
+
+    transition:
+        transform .18s ease,
+        box-shadow .18s ease,
+        border-color .18s ease,
+        background .18s ease;
+}
+
+.stButton > button:hover,
+.stDownloadButton > button:hover,
+[data-testid="stFormSubmitButton"] button:hover {
+    color: #112237;
+    border-color: #8cc4d0;
+
+    box-shadow:
+        0 9px 22px rgba(17,29,50,.1);
+
+    transform: translateY(-1px);
+}
+
+/* PRIMARY BURGUNDY BUTTONS */
+
+button[kind="primary"],
+button[kind="primaryFormSubmit"],
+button[data-testid="stBaseButton-primary"] {
+    background: linear-gradient(
+        135deg,
+        #bb2847 0%,
+        #a61c35 100%
+    ) !important;
+
+    border: 1px solid #af2440 !important;
+    color: #fff !important;
+    font-weight: 700 !important;
+
+    box-shadow:
+        0 9px 22px rgba(166,28,53,.18) !important;
+}
+
+button[kind="primary"]:hover,
+button[kind="primaryFormSubmit"]:hover,
+button[data-testid="stBaseButton-primary"]:hover {
+    background: linear-gradient(
+        135deg,
+        #c63050,
+        #a61c35
+    ) !important;
+
+    border-color: #c63050 !important;
+    color: #fff !important;
+}
+
+/* DISABLED BUTTONS */
+
+.stButton button:disabled,
+.stDownloadButton button:disabled,
+button[kind="primary"]:disabled {
+    opacity: .50;
+    cursor: not-allowed;
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+button:focus-visible {
+    outline: 2px solid #67b5c4 !important;
+    outline-offset: 3px;
+}
+
+
+/* ============================================================
+   09 — CV AND PORTRAIT UPLOAD AREAS
+   ============================================================ */
+
+[data-testid="stFileUploaderDropzone"] {
+    background: var(--rf-dark-gradient) !important;
+    border: 1.5px dashed #6b98ac !important;
+    border-radius: 18px !important;
+    min-height: 112px;
+
+    box-shadow:
+        0 10px 25px rgba(17,29,50,.11);
+}
+
+[data-testid="stFileUploaderDropzone"] * {
+    color: #f2f8ff !important;
+}
+
+[data-testid="stFileUploaderDropzone"] small {
+    color: #bed3e4 !important;
+}
+
+[data-testid="stFileUploaderDropzone"] button {
+    background: #edf6fb !important;
+    border: 1px solid #a8d2dd !important;
+    color: #17314c !important;
+    border-radius: 11px !important;
+    box-shadow: none !important;
+}
+
+[data-testid="stFileUploaderDropzone"] button * {
+    color: #17314c !important;
+}
+
+[data-testid="stFileUploaderDropzone"]:hover {
+    border-color: var(--rf-cyan) !important;
+}
+
+
+/* ============================================================
+   10 — CV TEMPLATE SELECTION CARDS
+   ============================================================ */
+
+.rf-template {
+    position: relative;
+    overflow: hidden;
+
+    background: var(--rf-dark-gradient) !important;
+    color: #fff;
+
+    border: 1px solid #3a5773;
+    border-radius: 22px;
+    padding: 24px 21px 22px;
+    min-height: 475px;
+
+    box-shadow: var(--rf-shadow);
+
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease;
+}
+
+.rf-template:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 17px 35px rgba(17,29,50,.18);
+}
+
+.rf-template h3 {
+    color: #fff !important;
+    font-size: 1.22rem;
+    margin: 14px 0 10px;
+}
+
+.rf-template p {
+    color: #d0e0ee !important;
+    font-size: .9rem;
+    line-height: 1.57;
+    margin: 0;
+}
+
+
+/* ============================================================
+   11 — DOCUMENT MINIATURES
+   ============================================================ */
+
+/* White paper previews inside dark template cards */
+
+.rf-mini-exec,
+.rf-mini-harvard {
+    width: min(100%,240px);
+    max-width: 240px;
+    height: 305px;
+    margin: 3px auto 19px;
+    background: #fff;
+    border: 1px solid #d9e3ed;
+
+    box-shadow:
+        0 12px 25px rgba(1,11,26,.28);
+
+    overflow: hidden;
+    transition: transform .2s ease;
+}
+
+.rf-template:hover .rf-mini-exec,
+.rf-template:hover .rf-mini-harvard {
+    transform: scale(1.025);
+}
+
+
+/* EXECUTIVE DOCUMENT MINIATURE */
+
+.rf-mini-exec {
+    display: flex;
+}
+
+.rf-mini-exec .side {
+    flex: 0 0 35%;
+    background: #404751;
+    padding: 16px 9px;
+}
+
+.rf-mini-exec .side i {
+    display: block;
+    width: 47px;
+    height: 53px;
+    margin: 0 auto 12px;
+    border-radius: 3px;
+
+    background: linear-gradient(
+        135deg,
+        #a8c2d6,
+        #6889aa
+    );
+}
+
+.rf-mini-exec .side::after {
+    content: "SKILLS";
+    display: block;
+    margin-top: 23px;
+    font-size: 6px;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: .08em;
+}
+
+.rf-mini-exec .side em {
+    display: block;
+    background: #a6bccd75;
+    height: 4px;
+    margin: 7px 0;
+    border-radius: 1px;
+}
+
+.rf-mini-exec .body {
+    flex: 1;
+    padding: 18px 11px;
+    min-width: 0;
+}
+
+.rf-mini-exec .body::before {
+    content: "PROFESSIONAL PROFILE";
+    display: block;
+    font-size: 7px;
+    font-weight: 800;
+    color: #243f59;
+    margin-bottom: 9px;
+}
+
+.rf-mini-exec .body em {
+    display: block;
+    background: #d9e4ed;
+    height: 4px;
+    margin: 6px 0;
+    border-radius: 1px;
+}
+
+.rf-mini-exec .body strong {
+    display: block;
+    height: 7px;
+    background: #233f5b;
+    width: 82%;
+    margin: 16px 0 9px;
+}
+
+
+/* HARVARD DOCUMENT MINIATURE */
+
+.rf-mini-harvard {
+    padding: 23px 17px;
+}
+
+.rf-mini-harvard strong {
+    display: block;
+    width: 72%;
+    height: 9px;
+    background: #17243b;
+    margin: 0 auto 11px;
+}
+
+.rf-mini-harvard::before {
+    content: "RESUME";
+    display: block;
+    text-align: center;
+    color: #6c7f95;
+    font-size: 7px;
+    letter-spacing: .18em;
+    margin: 10px 0 7px;
+}
+
+.rf-mini-harvard em {
+    display: block;
+    height: 4px;
+    background: #dce5ed;
+    margin: 7px 0;
+    border-radius: 1px;
+}
+
+.rf-mini-harvard .rule {
+    height: 2.5px;
+    background: #a61c35;
+    margin: 18px 0 10px;
+}
+
+.rf-mini-harvard .pill {
+    display: inline-block;
+    width: 42px;
+    height: 9px;
+    border: 1px solid #cad9e7;
+    border-radius: 8px;
+    margin: 4px 2px;
+    background: #f7fafd;
+}
+
+
+/* ============================================================
+   12 — ALERTS AND STATUS MESSAGES
+   ============================================================ */
+
+[data-testid="stAlert"] {
+    border-radius: 14px;
+    border: 1px solid #d8e4ef;
+}
+
+[data-testid="stAlert"] p {
+    line-height: 1.5;
+}
+
+[data-testid="stDataFrame"] {
+    border-radius: 13px;
+    overflow: hidden;
+}
+
+
+/* ============================================================
+   13 — RESPONSIVE DESIGN
+   ============================================================ */
+
+@media (max-width: 900px) {
+    .rf-step-grid {
+        grid-template-columns: repeat(2,minmax(0,1fr));
+    }
+
+    .rf-hero {
+        padding: 30px 28px;
+    }
+
+    .rf-template {
+        min-height: 435px;
+    }
+}
+
+@media (max-width: 560px) {
+    .rf-step-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .rf-step {
+        min-height: auto;
+        padding: 20px;
+    }
+
+    .rf-hero {
+        padding: 26px 21px;
+        border-radius: 18px;
+    }
+
+    .rf-hero h1 {
+        font-size: 1.85rem;
+    }
+
+    .block-container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .rf-template {
+        min-height: auto;
+    }
+
+    :is(
+        .st-key-rf-start-upload,
+        .st-key-rf-start-new,
+        .st-key-rf-start-example
+    ) {
+        min-height: auto;
+    }
+}
+
+/* Reduced motion for accessibility */
+
+@media (prefers-reduced-motion: reduce) {
+    .rf-step,
+    .rf-template,
+    .rf-mini-exec,
+    .rf-mini-harvard,
+    .stButton > button,
+    .stDownloadButton > button,
+    .st-key-rf-start-upload,
+    .st-key-rf-start-new,
+    .st-key-rf-start-example {
+        transition: none !important;
+        transform: none !important;
+    }
+}
+
+/* ============================================================
+   RESUMEFORGE STUDIO — FUTURISTIC PDF PREVIEW
+   ============================================================ */
+
+/* THREE PREVIEW STATISTICS CARDS */
+
+.st-key-rf-preview-stats [data-testid="stMetric"] {
+    background:
+        radial-gradient(
+            circle at 95% 5%,
+            rgba(134,217,222,.17),
+            transparent 45%
+        ),
+        linear-gradient(
+            125deg,
+            #111d32 0%,
+            #243d57 100%
+        ) !important;
+
+    border: 1px solid #385571 !important;
+    border-radius: 22px !important;
+
+    padding: 24px 26px !important;
+    min-height: 145px;
+
+    box-shadow:
+        0 12px 28px rgba(17,29,50,.13);
+
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease,
+        border-color .2s ease;
+}
+
+/* CARD HOVER */
+
+.st-key-rf-preview-stats [data-testid="stMetric"]:hover {
+    border-color: #7abcc7 !important;
+    box-shadow:
+        0 16px 34px rgba(17,29,50,.19);
+
+    transform: translateY(-2px);
+}
+
+/* METRIC LABELS */
+
+.st-key-rf-preview-stats [data-testid="stMetricLabel"],
+.st-key-rf-preview-stats [data-testid="stMetricLabel"] * {
+    color: #92dfe5 !important;
+    font-size: 1rem !important;
+    font-weight: 650 !important;
+}
+
+/* LARGE METRIC NUMBERS */
+
+.st-key-rf-preview-stats [data-testid="stMetricValue"],
+.st-key-rf-preview-stats [data-testid="stMetricValue"] * {
+    color: #ffffff !important;
+    font-size: 2.7rem !important;
+    font-weight: 750 !important;
+    line-height: 1.2 !important;
+}
+
+/* PAGE SELECTOR LABEL */
+
+.st-key-rf-preview-stats [data-testid="stSelectbox"] label p {
+    color: #17243b !important;
+    font-weight: 700 !important;
+    font-size: 1rem !important;
+}
+
+/* PAGE SELECTOR — DARK FUTURISTIC STYLE */
+
+.st-key-rf-preview-stats
+[data-testid="stSelectbox"]
+[data-baseweb="select"] > div {
+    background: linear-gradient(
+        125deg,
+        #111d32,
+        #243d57
+    ) !important;
+
+    border: 1px solid #385571 !important;
+    border-radius: 15px !important;
+    min-height: 60px;
+
+    box-shadow:
+        0 8px 20px rgba(17,29,50,.11);
+}
+
+/* SELECTED PAGE TEXT */
+
+.st-key-rf-preview-stats
+[data-testid="stSelectbox"]
+[data-baseweb="select"] [role="combobox"] {
+    color: #ffffff !important;
+}
+
+.st-key-rf-preview-stats
+[data-testid="stSelectbox"]
+[data-baseweb="select"] span {
+    color: #ffffff !important;
+}
+
+/* DROPDOWN ARROW */
+
+.st-key-rf-preview-stats
+[data-testid="stSelectbox"]
+[data-baseweb="select"] svg {
+    fill: #92dfe5 !important;
+    color: #92dfe5 !important;
+}
+
+/* KEYBOARD FOCUS */
+
+.st-key-rf-preview-stats
+[data-testid="stSelectbox"]
+[data-baseweb="select"]:focus-within > div {
+    border-color: #92dfe5 !important;
+    box-shadow: 0 0 0 2px rgba(146,223,229,.22);
+}
+
+/* MOBILE OPTIMIZATION */
+
+@media (max-width: 700px) {
+    .st-key-rf-preview-stats [data-testid="stMetric"] {
+        padding: 17px 16px !important;
+        min-height: 110px;
+    }
+
+    .st-key-rf-preview-stats [data-testid="stMetricValue"],
+    .st-key-rf-preview-stats [data-testid="stMetricValue"] * {
+        font-size: 2rem !important;
+    }
+}
+
+/* ACCESSIBILITY */
+
+@media (prefers-reduced-motion: reduce) {
+    .st-key-rf-preview-stats [data-testid="stMetric"] {
+        transition: none !important;
+        transform: none !important;
+    }
+}
