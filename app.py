@@ -147,13 +147,13 @@ def home():
     c1,c2,c3=st.columns(3)
     with c1:
         with st.container(border=True):
-            st.markdown("#### 📤 Upload an existing CV")
+            st.markdown("#### :material/upload_file: Upload an existing CV")
             st.write("Already have a résumé? Let ResumeForge read it for you.")
             if st.button("Upload my CV", use_container_width=True, type="primary"):
                 route("upload")
     with c2:
         with st.container(border=True):
-            st.markdown("#### ✍️ Create from scratch")
+            st.markdown("#### :material/edit_note: Create from scratch")
             st.write("Start with an empty profile and add your own information.")
             if st.button("Create a new CV", use_container_width=True):
                 st.session_state.studio_master = empty_profile()
@@ -162,7 +162,7 @@ def home():
                 route("editor")
     with c3:
         with st.container(border=True):
-            st.markdown("#### ✨ Explore with an example")
+            st.markdown("#### :material/visibility: Explore with an example")
             st.write("See how ResumeForge works using fictional information.")
             if st.button("Try the example", use_container_width=True):
                 load_demo()
