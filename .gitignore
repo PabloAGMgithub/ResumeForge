@@ -16,3 +16,5 @@ venv/
 *_preview_p*.png
 *.zip
 *.log
+test_groq.py
+rf_upgrade_backup/
