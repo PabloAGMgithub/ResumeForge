@@ -1068,3 +1068,34 @@ button:focus-visible {
         transform: none !important;
     }
 }
+
+/* ============================================================
+   GUIDED CV EDITOR — scoped to the preview panel only
+   ============================================================ */
+.block-container:has(.st-key-rf-guided-preview) {
+    max-width: 1480px;
+}
+.st-key-rf-guided-preview [data-testid="stVerticalBlockBorderWrapper"] {
+    border: 1px solid #d4e3ee;
+    border-radius: 19px;
+    background: linear-gradient(160deg, #f9fcff, #e9f3fa);
+}
+.st-key-rf-guided-preview .rf-guide-tip {
+    border-left: 3px solid #50b8c7;
+    background: #eaf7fa;
+    padding: 11px 13px;
+    border-radius: 9px;
+    color: #233c55;
+    font-size: .88rem;
+    line-height: 1.5;
+}
+.st-key-rf-guided-preview [data-testid="stImage"] img {
+    border: 1px solid #dae4ed;
+    box-shadow: 0 8px 20px rgba(17, 29, 50, .12);
+    background: white;
+}
+@media (max-width: 850px) {
+    .block-container:has(.st-key-rf-guided-preview) {
+        max-width: 100%;
+    }
+}

@@ -6,6 +6,7 @@ from resumeforge.i18n import tr, tr_html
 
 from resumeforge.ai_chat import ai_assistant_page
 from resumeforge.cv_review import render_cv_review
+from resumeforge.guided_preview import render_guided_preview
 
 import io
 import json
@@ -200,59 +201,117 @@ def save_contact(values):
     save_cv(p)
 
 
+def rf_focus_about(label):
+    """Track which field was last edited, without saving the user's draft."""
+    st.session_state["rf_guide_field_About_you"] = label
+
+
+def rf_live_tip():
+    # This guidance must also work when the visitor uses a non-English UI.
+    return {
+        "en": "The preview updates when you leave a field. Click Save to keep the changes in your CV.",
+        "es": "La vista previa se actualiza al salir de un campo. Pulsa Guardar para conservar los cambios en tu CV.",
+        "de": "Die Vorschau aktualisiert sich, sobald du ein Feld verlässt. Klicke auf Speichern, um Änderungen zu behalten.",
+        "fr": "L’aperçu s’actualise lorsque vous quittez un champ. Cliquez sur Enregistrer pour conserver les modifications.",
+        "zh": "离开输入框后预览会更新。点击“保存”才能将更改写入简历。",
+        "ja": "入力欄から移動するとプレビューが更新されます。変更を履歴書に反映するには［保存］を押してください。",
+        "nl": "De voorvertoning wordt bijgewerkt wanneer je het veld verlaat. Klik op Opslaan om wijzigingen te bewaren.",
+    }.get(st.session_state.get("rf_interface_lang", "en"),
+          "The preview updates when you leave a field. Click Save to keep the changes in your CV.")
+
+
 def contact_tab():
-    p=st.session_state.studio_cv
-    rev=st.session_state.studio_revision
-    with st.form(f"identity_{rev}"):
+    p = st.session_state.studio_cv
+    rev = st.session_state.studio_revision
+    # Streamlit forms hold unsaved edits until submission. Regular widgets let
+    # the side preview use the draft as soon as an input is committed (blur/Enter).
+    with st.container(border=True, key="rf-live-contact"):
         st.markdown(tr("#### Who are you?"))
-        a,b=st.columns(2)
+        a, b = st.columns(2)
         with a:
-            name=st.text_input(tr("Full name"),p.get("name", ""))
-            headline=st.text_input(tr("Professional headline (optional)"),p.get("headline", ""),help=tr("For example: Bilingual Educator | Healthcare Professional"))
-            email=st.text_input(tr("Email"),p.get("email", ""))
-            location=st.text_input(tr("City and country"),p.get("location", ""))
+            name = st.text_input(tr("Full name"), p.get("name", ""),
+                                 key=f"rf_live_name_{rev}",
+                                 on_change=rf_focus_about, args=("Full name",))
+            headline = st.text_input(tr("Professional headline (optional)"), p.get("headline", ""),
+                                     help=tr("For example: Bilingual Educator | Healthcare Professional"),
+                                     key=f"rf_live_headline_{rev}",
+                                     on_change=rf_focus_about, args=("Professional headline",))
+            email = st.text_input(tr("Email"), p.get("email", ""),
+                                  key=f"rf_live_email_{rev}",
+                                  on_change=rf_focus_about, args=("Contact details",))
+            location = st.text_input(tr("City and country"), p.get("location", ""),
+                                     key=f"rf_live_location_{rev}",
+                                     on_change=rf_focus_about, args=("Contact details",))
         with b:
-            phone=st.text_input(tr("Phone number"),p.get("phone", ""))
-            tagline=st.text_input(tr("Tagline (optional)"),p.get("tagline", ""),help=tr("A short statement about the value you bring; mainly used in Executive style."))
-            linkedin=st.text_input(tr("LinkedIn (optional)"),p.get("linkedin", ""))
-            github=st.text_input(tr("Portfolio or GitHub (optional)"),p.get("github", ""))
+            phone = st.text_input(tr("Phone number"), p.get("phone", ""),
+                                  key=f"rf_live_phone_{rev}",
+                                  on_change=rf_focus_about, args=("Contact details",))
+            tagline = st.text_input(tr("Tagline (optional)"), p.get("tagline", ""),
+                                    help=tr("A short statement about the value you bring; mainly used in Executive style."),
+                                    key=f"rf_live_tagline_{rev}",
+                                    on_change=rf_focus_about, args=("Tagline",))
+            linkedin = st.text_input(tr("LinkedIn (optional)"), p.get("linkedin", ""),
+                                     key=f"rf_live_linkedin_{rev}",
+                                     on_change=rf_focus_about, args=("Contact details",))
+            github = st.text_input(tr("Portfolio or GitHub (optional)"), p.get("github", ""),
+                                   key=f"rf_live_github_{rev}",
+                                   on_change=rf_focus_about, args=("Contact details",))
         st.markdown(tr("#### Tell your story"))
-        summary=st.text_area(tr("Professional summary"),p.get("summary", ""),height=145)
-        languages=st.text_area(tr("Languages (one per line)"),"\n".join(p.get("languages", [])),height=100)
-        submitted=st.form_submit_button(tr("Save profile details"),type="primary",use_container_width=True)
+        summary = st.text_area(tr("Professional summary"), p.get("summary", ""), height=145,
+                               key=f"rf_live_summary_{rev}",
+                               on_change=rf_focus_about, args=("Professional summary",))
+        languages = st.text_area(tr("Languages (one per line)"), "\n".join(p.get("languages", [])), height=100,
+                                 key=f"rf_live_languages_{rev}",
+                                 on_change=rf_focus_about, args=("Languages",))
+        st.caption(rf_live_tip())
+        submitted = st.button(tr("Save profile details"), type="primary", use_container_width=True,
+                              key=f"rf_live_save_contact_{rev}")
+
+    values = {"name": name, "headline": headline, "email": email, "location": location,
+              "phone": phone, "tagline": tagline, "linkedin": linkedin, "github": github,
+              "summary": summary, "languages": lines(languages)}
+    draft = deepcopy(st.session_state.studio_cv)
+    draft.update(values)
+    st.session_state.rf_live_preview_cv = draft
     if submitted:
-        save_contact({"name":name,"headline":headline,"email":email,"location":location,"phone":phone,"tagline":tagline,"linkedin":linkedin,"github":github,"summary":summary,"languages":lines(languages)})
+        save_contact(values)
         st.success(tr("Your profile details have been saved."))
 
 
 def skills_tab():
     p=st.session_state.studio_cv
+    rev=st.session_state.studio_revision
     st.markdown(tr("#### Your skills"))
     if flatten_skills(p):
         st.markdown("".join(f'<span class="rf-tag">{text(s)}</span>' for s in flatten_skills(p)),unsafe_allow_html=True)
     else:
         st.info(tr("No skills added yet. Add your strengths below."))
-    with st.form(f"skill_form_{st.session_state.studio_revision}"):
+    with st.container(border=True):
         skills=st.text_area(tr("Skills (one per line)"),"\n".join(p.get("skills", [])),height=165,
-                            help=tr("These become rounded skill tags in the Harvard-style CV."))
+                            help=tr("These become rounded skill tags in the Harvard-style CV."),
+                            key=f"rf_live_skills_{rev}")
         st.caption(tr("To remove a skill, delete its line and save."))
-        pressed=st.form_submit_button(tr("Save skills"),type="primary")
+        pressed=st.button(tr("Save skills"),type="primary",key=f"rf_live_save_skills_{rev}")
+    st.session_state.rf_live_preview_cv["skills"] = lines(skills)
     if pressed:
         copy=deepcopy(p);copy["skills"]=lines(skills);save_cv(copy);st.success(tr("Skills saved."))
     st.markdown(tr("#### Organize skills for the Executive design (optional)"))
     st.caption(tr("Executive-style groups are optional. If you skip them, ResumeForge can group your individual skills automatically."))
-    with st.form(f"groups_{st.session_state.studio_revision}"):
+    with st.container(border=True):
         groups=deepcopy(p.get("skill_groups", []))
-        groups += [{"title":"","items":[]}] * (1 + st.session_state.studio_group_slots)
+        groups += [{"title":"","items":[]} for _ in range(1 + st.session_state.studio_group_slots)]
         changed=[]
         for i,g in enumerate(groups):
             a,b=st.columns([1,2])
-            with a: label=st.text_input(tr(f"Category {i+1}"),g.get("title", ""),key=f"group_title_{i}_{st.session_state.studio_revision}")
-            with b: content=st.text_input(tr(f"Skills for category {i+1} (separate with ;)"),"; ".join(g.get("items", [])),key=f"group_items_{i}_{st.session_state.studio_revision}")
+            with a:
+                label=st.text_input(tr(f"Category {i+1}"),g.get("title", ""),key=f"group_title_{i}_{rev}")
+            with b:
+                content=st.text_input(tr(f"Skills for category {i+1} (separate with ;)"),"; ".join(g.get("items", [])),key=f"group_items_{i}_{rev}")
             if label.strip():changed.append({"title":label.strip(),"items":[v.strip() for v in content.split(";") if v.strip()]})
-        save=st.form_submit_button(tr("Save skill categories"))
+        save=st.button(tr("Save skill categories"),key=f"rf_live_save_groups_{rev}")
+    st.session_state.rf_live_preview_cv["skill_groups"] = changed
     if save:
-        copy=deepcopy(p);copy["skill_groups"]=changed;save_cv(copy);st.success(tr("Categories saved."))
+        copy=deepcopy(st.session_state.studio_cv);copy["skill_groups"]=changed;save_cv(copy);st.success(tr("Categories saved."))
     if st.button(tr("Add another category")):
         st.session_state.studio_group_slots += 1
         st.rerun()
@@ -260,24 +319,29 @@ def skills_tab():
 
 def edit_records(section,title,fields,default,bullets=False):
     p=st.session_state.studio_cv
+    rev=st.session_state.studio_revision
     records=p.get(section, [])
+    preview_records=deepcopy(records)
     st.markdown(f"#### {title}")
     st.caption(tr("Open a card to edit. Save each card before moving to another step."))
     for i,record in enumerate(records):
         label=record.get(fields[0][0], "") or f"New {title.lower()} entry"
         secondary=record.get(fields[1][0], "") or "Add details"
         with st.expander(f"{i+1}. {label} · {secondary}",expanded=(not record.get(fields[0][0]) or not record.get(fields[1][0]))):
-            with st.form(f"rec_{section}_{i}_{st.session_state.studio_revision}"):
+            # Ordinary inputs allow the preview to reflect edits before saving.
+            with st.container(border=True):
                 result={}
                 for field,label_,help_ in fields:
                     v=record.get(field,[] if field=="bullets" else "")
+                    widget_key=f"rf_live_{section}_{i}_{field}_{rev}"
                     if field=="bullets":
-                        result[field]=lines(st.text_area(label_,"\n".join(v),height=150,help=help_))
+                        result[field]=lines(st.text_area(label_,"\n".join(v),height=150,help=help_,key=widget_key))
                     elif field=="description":
-                        result[field]=st.text_area(label_,str(v),height=100,help=help_)
+                        result[field]=st.text_area(label_,str(v),height=100,help=help_,key=widget_key)
                     else:
-                        result[field]=st.text_input(label_,str(v),help=help_)
-                saved=st.form_submit_button(tr("Save this entry"),type="primary")
+                        result[field]=st.text_input(label_,str(v),help=help_,key=widget_key)
+                saved=st.button(tr("Save this entry"),type="primary",key=f"rf_live_save_{section}_{i}_{rev}")
+            preview_records[i]=deepcopy(result)
             if saved:
                 copy=deepcopy(p);copy[section][i]=result;save_cv(copy)
                 st.success(tr("Entry saved."))
@@ -293,9 +357,10 @@ def edit_records(section,title,fields,default,bullets=False):
             with c3:
                 if st.button(tr("Remove"),key=f"rm_{section}_{i}"):
                     copy=deepcopy(p);copy[section].pop(i);save_cv(copy);st.rerun()
+    st.session_state.rf_live_preview_cv[section] = preview_records
     if not records: st.info(tr(f"Nothing in {title.lower()} yet. Use Add below to begin."))
     if st.button(tr(f"+ Add {title.lower()} entry"),key=f"add_{section}",type="secondary"):
-        copy=deepcopy(p);copy[section].append(deepcopy(default));save_cv(copy);st.rerun()
+        copy=deepcopy(st.session_state.studio_cv);copy[section].append(deepcopy(default));save_cv(copy);st.rerun()
 
 
 EXPERIENCE=[("title","Job title",None),("organization","Employer / organization",None),("period","Dates (e.g., 2022–Present)",None),("bullets","Achievements (one per line)","Start with an action verb, and include verified results where possible.")]
@@ -305,10 +370,15 @@ PROJECTS=[("name","Project name",None),("technologies","Tools / technologies (op
 
 def extras_tab():
     p=st.session_state.studio_cv
-    with st.form(f"extras_{st.session_state.studio_revision}"):
-        training=st.text_area(tr("Additional courses or training (one per line)"),"\n".join(p.get("training", [])),height=130)
-        extra=st.text_area(tr("Other information from your imported CV"),p.get("extra_notes", ""),height=125)
-        saved=st.form_submit_button(tr("Save additional information"),type="primary")
+    rev=st.session_state.studio_revision
+    with st.container(border=True):
+        training=st.text_area(tr("Additional courses or training (one per line)"),"\n".join(p.get("training", [])),height=130,
+                              key=f"rf_live_training_{rev}")
+        extra=st.text_area(tr("Other information from your imported CV"),p.get("extra_notes", ""),height=125,
+                           key=f"rf_live_extra_{rev}")
+        saved=st.button(tr("Save additional information"),type="primary",key=f"rf_live_save_extras_{rev}")
+    st.session_state.rf_live_preview_cv["training"] = lines(training)
+    st.session_state.rf_live_preview_cv["extra_notes"] = extra
     if saved:
         copy=deepcopy(p);copy["training"]=lines(training);copy["extra_notes"]=extra;save_cv(copy)
         st.success(tr("Additional information saved."))
@@ -321,16 +391,25 @@ def extras_tab():
 def editor_page():
     page_header(tr("STEP 2 · PERSONALIZE"), tr("Make your story shine"), tr("Update your information using simple cards. Your original imported text remains available for reference."))
     cv=st.session_state.studio_cv
+    # Unsaved draft for the side preview; never used by PDF/Word downloads.
+    st.session_state.rf_live_preview_cv = deepcopy(cv)
     st.caption(tr(f"Editing: {cv.get('name') or 'Untitled CV'}"))
     options=["About you","Work experience","Education","Skills","Projects","Other details"]
     category=st.radio(tr("What would you like to edit?"),options, format_func=tr, horizontal=True, key="studio_editor_category")
     st.divider()
-    if category=="About you":contact_tab()
-    elif category=="Work experience":edit_records("experience","Work experience",EXPERIENCE,{"title":"","organization":"","period":"","bullets":[]},True)
-    elif category=="Education":edit_records("education","Education",EDUCATION,{"qualification":"","institution":"","year":""})
-    elif category=="Skills":skills_tab()
-    elif category=="Projects":edit_records("projects","Projects",PROJECTS,{"name":"","technologies":"","description":""})
-    else:extras_tab()
+    editor_col, guide_col = st.columns([1.48, 1.0], gap="large")
+    with editor_col:
+        if category=="About you":contact_tab()
+        elif category=="Work experience":edit_records("experience","Work experience",EXPERIENCE,{"title":"","organization":"","period":"","bullets":[]},True)
+        elif category=="Education":edit_records("education","Education",EDUCATION,{"qualification":"","institution":"","year":""})
+        elif category=="Skills":skills_tab()
+        elif category=="Projects":edit_records("projects","Projects",PROJECTS,{"name":"","technologies":"","description":""})
+        else:extras_tab()
+    with guide_col:
+        render_guided_preview(
+            st.session_state.rf_live_preview_cv, category, st.session_state.studio_style,
+            photo=st.session_state.studio_photo,
+        )
     st.divider()
     c1,c2=st.columns(2)
     with c1:
